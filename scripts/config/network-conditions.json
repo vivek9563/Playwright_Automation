@@ -1,0 +1,44 @@
+{
+  "networkConditions": [
+    {
+      "name": "Normal",
+      "bandwidth": "10 Mbps",
+      "latency": "50ms",
+      "expectedResult": "Login successful within 2 seconds",
+      "playwright": {
+        "downloadThroughput": 1280000,
+        "uploadThroughput": 1280000,
+        "latency": 50
+      }
+    },
+    {
+      "name": "Slow 3G",
+      "bandwidth": "1.6 Mbps",
+      "latency": "200ms",
+      "expectedResult": "Login successful within 5 seconds",
+      "playwright": {
+        "downloadThroughput": 200000,
+        "uploadThroughput": 200000,
+        "latency": 200
+      }
+    },
+    {
+      "name": "2G",
+      "bandwidth": "0.4 Mbps",
+      "latency": "500ms",
+      "expectedResult": "Login completes, may show loading",
+      "playwright": {
+        "downloadThroughput": 50000,
+        "uploadThroughput": 50000,
+        "latency": 500
+      }
+    },
+    {
+      "name": "Timeout",
+      "bandwidth": "0 Mbps",
+      "latency": "N/A",
+      "expectedResult": "Error message, user can retry",
+      "simulate": "connection-timeout"
+    }
+  ]
+}

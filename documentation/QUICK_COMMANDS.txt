@@ -1,0 +1,109 @@
+═══════════════════════════════════════════════════════════════════════════════
+                   VEDAK CRM - TEST SUITE QUICK COMMANDS
+═══════════════════════════════════════════════════════════════════════════════
+
+📍 LOCATION: ~/Downloads/Vedak_Automation
+
+═══════════════════════════════════════════════════════════════════════════════
+🎯 RUN ALL 80 TESTS (MOST COMMON):
+═══════════════════════════════════════════════════════════════════════════════
+
+cd ~/Downloads/Vedak_Automation && node complete-master-test-runner.js
+
+This will:
+  ✅ Run Dashboard Tests (21 tests)
+  ✅ Run Organization Tests (23 tests)
+  ✅ Run Sidebar Navigation Tests (25 tests)
+  ✅ Run Projects Submenu Tests (11 tests)
+  ✅ Generate HTML reports
+  ✅ Update Excel files
+  ✅ Display pass/fail results
+
+═══════════════════════════════════════════════════════════════════════════════
+🎯 RUN INDIVIDUAL MODULES:
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Dashboard Tests (21 tests):
+   cd ~/Downloads/Vedak_Automation && npm run test:all
+
+2. Organization Tests (23 tests):
+   cd ~/Downloads/Vedak_Automation && node organization-tests/run-organization-tests.js
+
+3. Sidebar Navigation Tests (25 tests):
+   cd ~/Downloads/Vedak_Automation && node sidebar-tests/run-sidebar-tests.js
+
+4. Projects Submenu Tests (11 tests):
+   cd ~/Downloads/Vedak_Automation && node projects-submenu-tests/run-projects-submenu-tests.js
+
+═══════════════════════════════════════════════════════════════════════════════
+📊 VIEW REPORTS:
+═══════════════════════════════════════════════════════════════════════════════
+
+Excel Report (Master Test Report):
+  open ~/Downloads/Vedak_Automation/Master_Test_Report.xlsx
+
+Interactive HTML Dashboard:
+  open ~/Downloads/Vedak_Automation/test-reports/master-test-report.html
+
+Module-Specific HTML Reports:
+  open ~/Downloads/Vedak_Automation/test-reports/dashboard-report.html
+  open ~/Downloads/Vedak_Automation/test-reports/organization-report.html
+  open ~/Downloads/Vedak_Automation/test-reports/sidebar-report.html
+  open ~/Downloads/Vedak_Automation/test-reports/projects-submenu-report.html
+
+═══════════════════════════════════════════════════════════════════════════════
+⚡ QUICK NPM COMMANDS:
+═══════════════════════════════════════════════════════════════════════════════
+
+cd ~/Downloads/Vedak_Automation
+
+npm run test:all                  # Run dashboard + login tests
+npm run test:optimized           # Run optimized dashboard tests
+npm run test:master              # Run master test runner
+npm run test:generate-report     # Generate HTML reports
+npm run test:update-excel        # Update Excel files
+npm run init:session             # Initialize session/login
+
+═══════════════════════════════════════════════════════════════════════════════
+✨ EXPECTED OUTPUT:
+═══════════════════════════════════════════════════════════════════════════════
+
+Each test run will show:
+  • Real-time test progress in terminal
+  • Each test name and execution time
+  • Pass/Fail status (✅/❌)
+  • Total summary at end
+  • 100% pass rate for all 80 tests
+
+═══════════════════════════════════════════════════════════════════════════════
+📈 RESULTS STORED IN:
+═══════════════════════════════════════════════════════════════════════════════
+
+Master_Test_Report.xlsx          - All 80 tests documented
+test-reports/                    - HTML reports (5 files)
+test-results/                    - JSON results files
+screenshots/                     - Test execution screenshots
+
+═══════════════════════════════════════════════════════════════════════════════
+🎯 TYPICAL WORKFLOW:
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Open Terminal
+2. Run: cd ~/Downloads/Vedak_Automation && node complete-master-test-runner.js
+3. Wait 4-5 minutes for all tests to complete
+4. Open Master_Test_Report.xlsx or HTML report
+5. Check results and share with team
+
+═══════════════════════════════════════════════════════════════════════════════
+💡 TIPS:
+═══════════════════════════════════════════════════════════════════════════════
+
+• Run tests daily for regression testing
+• Keep results archived for audit trail
+• Share HTML reports with non-technical stakeholders
+• Use Excel reports for detailed analysis
+• Run before every release to ensure quality
+
+═══════════════════════════════════════════════════════════════════════════════
+✅ READY TO USE! No additional setup needed.
+═══════════════════════════════════════════════════════════════════════════════

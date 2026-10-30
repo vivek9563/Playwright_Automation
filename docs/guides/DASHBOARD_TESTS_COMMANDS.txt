@@ -1,0 +1,153 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                   DASHBOARD TEST EXECUTION COMMANDS                        ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+PROJECT LOCATION: ~/Downloads/Vedak_Automation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+METHOD 1: Using Shell Script (Recommended)
+───────────────────────────────────────────
+
+  Command:
+  $ cd ~/Downloads/Vedak_Automation && ./RUN_DASHBOARD_TESTS.sh
+
+  This script will:
+  ✓ Verify you're in the correct directory
+  ✓ Display test configuration
+  ✓ Run all 16 dashboard tests
+  ✓ Show results summary
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+METHOD 2: Direct Node Command
+──────────────────────────────
+
+  Command:
+  $ cd ~/Downloads/Vedak_Automation && node modules/dashboard/test-cases/dashboard-tests/dashboard-major-func-tests-fixed.js
+
+  This runs the dashboard test script directly with Node.js
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TEST DETAILS
+────────────
+
+Test Suite: Dashboard Major Functionality Tests
+Location: modules/dashboard/test-cases/dashboard-tests/
+Script: dashboard-major-func-tests-fixed.js
+
+Test Count: 16 tests
+Categories:
+  - UI Tests: 3 tests (visual element verification)
+  - Functionality Tests: 4 tests (feature behavior validation)
+  - Major Tests: 5 tests (critical functionality)
+  - Minor Tests: 2 tests (secondary features)
+  - Edge Cases: 2 tests (boundary conditions)
+
+Execution Mode: Non-headless (visible browser)
+Application URL: http://localhost:5173/
+Test Duration: ~2-3 minutes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXPECTED OUTPUT
+────────────────
+
+The script will display:
+  ✓ Test initialization
+  ✓ Login process (Google authentication)
+  ✓ Dashboard navigation to http://localhost:5173/app/dashboard
+  ✓ Individual test execution with success messages
+  ✓ Final summary showing:
+    - Total tests executed
+    - Number passed
+    - Number failed
+    - Success rate percentage
+
+Sample Output:
+  ✅ Dashboard Redirect: PASS
+  ✅ Work Tab Access: PASS
+  ✅ Daily Training Hover: PASS
+  ... (16 tests total)
+  
+  ✅ FINAL RESULT: 16/16 PASSED (100%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OUTPUT FILES GENERATED
+──────────────────────
+
+After execution, the following files are updated:
+  
+  1. Excel Reports:
+     - modules/dashboard/Vedak_CRM_Dashboard_Major_TestCases.xlsx
+       (Summary, UI, Functionality, Major, Minor, Edge Cases tabs)
+
+  2. HTML Reports:
+     - reports/Dashboard_Major_Test_Report.html
+       (Interactive dashboard with test results)
+
+  3. JSON Results:
+     - reports/test-results/dashboard-major-results.json
+       (Structured test data and timestamps)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PREREQUISITES
+──────────────
+
+1. Node.js installed: $ node --version
+2. Playwright installed: (checked by script)
+3. Vedak CRM running on: http://localhost:5173/
+4. Google Gmail account configured with vedak.com email
+5. .env file with Gmail credentials configured
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TROUBLESHOOTING
+────────────────
+
+Issue: "Module not found" error
+  → Ensure you're in ~/Downloads/Vedak_Automation directory
+  → Run: cd ~/Downloads/Vedak_Automation
+
+Issue: "Port 5173 connection refused"
+  → Start Vedak CRM application
+  → Verify: http://localhost:5173 opens in browser
+
+Issue: "Gmail authentication failed"
+  → Check .env file exists in project root
+  → Verify GMAIL_EMAIL and GMAIL_APP_PASSWORD are set correctly
+
+Issue: Playwright errors
+  → Run: npm install (if not already installed)
+  → Or: npx playwright install
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUICK START GUIDE
+──────────────────
+
+Step 1: Navigate to project
+  $ cd ~/Downloads/Vedak_Automation
+
+Step 2: Run dashboard tests
+  $ ./RUN_DASHBOARD_TESTS.sh
+
+Step 3: Wait for completion (2-3 minutes)
+
+Step 4: Check results in:
+  - Terminal output
+  - modules/dashboard/Vedak_CRM_Dashboard_Major_TestCases.xlsx
+  - reports/Dashboard_Major_Test_Report.html
+
+Step 5: (Optional) View HTML report in browser
+  $ open reports/Dashboard_Major_Test_Report.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For more details on test categories and structure, see:
+  - modules/dashboard/Vedak_CRM_Dashboard_Major_TestCases.xlsx
+  - FINAL_COMPLETION_REPORT.md
+

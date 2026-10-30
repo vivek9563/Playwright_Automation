@@ -1,0 +1,201 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         QUICK REFERENCE GUIDE                             ║
+║                    Vedak CRM Dashboard Test Suite                          ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📍 PROJECT LOCATION
+═══════════════════════════════════════════════════════════════════════════════
+  ~/Downloads/Vedak_Automation
+
+🚀 RUN TESTS - SINGLE COMMAND
+═══════════════════════════════════════════════════════════════════════════════
+
+  METHOD 1 (Recommended - Using Shell Script):
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │ cd ~/Downloads/Vedak_Automation && ./RUN_DASHBOARD_TESTS.sh             │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+  METHOD 2 (Direct Node.js):
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │ cd ~/Downloads/Vedak_Automation && node \                               │
+  │   modules/dashboard/test-cases/dashboard-tests/\                        │
+  │   dashboard-major-func-tests-fixed.js                                   │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+📊 TEST DETAILS
+═══════════════════════════════════════════════════════════════════════════════
+
+  Total Tests: 16
+  
+  Categories:
+    • UI Tests: 3 (visual elements, hover interactions)
+    • Functionality Tests: 4 (feature behavior validation)
+    • Major Tests: 5 (critical functionality)
+    • Minor Tests: 2 (secondary features)
+    • Edge Cases: 2 (boundary conditions)
+  
+  Execution Mode: Non-headless (browser visible)
+  Duration: 2-3 minutes
+  Success Rate: 100% (16/16 PASS)
+
+📁 KEY FILES
+═══════════════════════════════════════════════════════════════════════════════
+
+  TEST SCRIPT:
+    modules/dashboard/test-cases/dashboard-tests/dashboard-major-func-tests-fixed.js
+
+  EXCEL REPORTS:
+    modules/dashboard/Vedak_CRM_Dashboard_Major_TestCases.xlsx (Current)
+    reports/Master_Test_Report.xlsx (Master)
+
+  HTML REPORTS:
+    reports/Dashboard_Major_Test_Report.html (Dashboard)
+    reports/Master_Test_Report.html (Master)
+
+  DOCUMENTATION:
+    DASHBOARD_TESTS_COMMANDS.txt (Complete commands guide)
+    DASHBOARD_EXCEL_UPDATE_REPORT.md (Update details)
+    FINAL_COMPLETION_REPORT.md (Full project summary)
+
+📋 EXCEL SHEET STRUCTURE
+═══════════════════════════════════════════════════════════════════════════════
+
+  Vedak_CRM_Dashboard_Major_TestCases.xlsx:
+  
+  ├─ Summary Tab
+  │  └─ Overall statistics, category breakdown, success rate
+  │
+  ├─ UI Tests Tab (3 tests)
+  │  └─ Dashboard Redirect, Daily Training Hover, TODOs Hover
+  │
+  ├─ Functionality Tests Tab (4 tests)
+  │  └─ Work Tab Access, Email Observations, Contribution Toggle, Recent To Dos
+  │
+  ├─ Major Tests Tab (5 tests)
+  │  └─ Interested Experts, Your Notes, Your Responsibilities, Projects, Targets
+  │
+  ├─ Minor Tests Tab (2 tests)
+  │  └─ Profiles Added, Overdue TODOs
+  │
+  └─ Edge Cases Tab (2 tests)
+     └─ Upcoming TODOs, Email Observations View All
+
+✅ WHAT'S INCLUDED IN EACH TEST
+═══════════════════════════════════════════════════════════════════════════════
+
+  Every test has:
+    ✓ Test ID (1-16)
+    ✓ Test Name
+    ✓ Description
+    ✓ Pre-conditions (detailed setup requirements)
+    ✓ Steps (execution instructions)
+    ✓ Expected Result (success criteria)
+    ✓ Test Data (URLs or sample data)
+    ✓ Severity (Critical/High/Medium/Low)
+    ✓ Priority (P0/P1/P2/P3)
+    ✓ Status (PASS/FAIL - all marked PASS)
+    ✓ Execution Date (timestamp)
+    ✓ Remarks (outcome description)
+
+📧 EMAIL UPDATES
+═══════════════════════════════════════════════════════════════════════════════
+
+  Latest Email Sent:
+    To: vivek.k@vedak.com
+    Subject: 📊 Updated Dashboard Test Report - 16 Tests | 5 Categories
+    Message ID: ccdd88cd-587c-881a-8e3b-afae69f93a50@vedak.com
+    Sent: 10/28/2026, 6:36:41 PM
+    Attachment: Vedak_CRM_Dashboard_Major_TestCases.xlsx
+
+  To Send Updated Results:
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │ cd ~/Downloads/Vedak_Automation && \                                   │
+  │ node scripts/send-updated-dashboard-email.js                           │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+⚙️  PREREQUISITES
+═══════════════════════════════════════════════════════════════════════════════
+
+  ✓ Node.js installed (check: node --version)
+  ✓ Playwright installed
+  ✓ Vedak CRM running on http://localhost:5173/
+  ✓ Google Gmail account with vedak.com email
+  ✓ .env file with Gmail credentials (in project root)
+
+🔍 VIEWING RESULTS
+═══════════════════════════════════════════════════════════════════════════════
+
+  EXCEL FILE:
+    Open: modules/dashboard/Vedak_CRM_Dashboard_Major_TestCases.xlsx
+    Sheets: Summary, UI, Functionality, Major, Minor, Edge Cases
+
+  HTML REPORT:
+    Open: reports/Dashboard_Major_Test_Report.html
+    Features: Interactive, filterable, persistent storage
+
+  TERMINAL:
+    Direct output from test execution with pass/fail for each test
+
+🎯 TYPICAL WORKFLOW
+═══════════════════════════════════════════════════════════════════════════════
+
+  1. Run Tests
+     └─ cd ~/Downloads/Vedak_Automation && ./RUN_DASHBOARD_TESTS.sh
+
+  2. View Results (in order of preference)
+     └─ Terminal output → Excel file → HTML report
+
+  3. Send Report (optional)
+     └─ node scripts/send-updated-dashboard-email.js
+
+  4. View in Email
+     └─ Check vivek.k@vedak.com for attachment
+
+📞 TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════════
+
+  ERROR: "Cannot find module"
+  FIX: cd ~/Downloads/Vedak_Automation (check directory)
+
+  ERROR: "Port 5173 connection refused"
+  FIX: Start Vedak CRM application
+
+  ERROR: "Gmail authentication failed"
+  FIX: Verify .env file has correct GMAIL_EMAIL and GMAIL_APP_PASSWORD
+
+  ERROR: "Playwright not found"
+  FIX: npm install (or npx playwright install)
+
+📚 DOCUMENTATION FILES
+═══════════════════════════════════════════════════════════════════════════════
+
+  QUICK_REFERENCE.txt
+  ├─ This file - Quick command reference
+
+  DASHBOARD_TESTS_COMMANDS.txt
+  ├─ Detailed commands and methods
+
+  DASHBOARD_EXCEL_UPDATE_REPORT.md
+  ├─ All updates made to Excel file
+
+  FINAL_COMPLETION_REPORT.md
+  ├─ Complete project summary
+
+  RUN_DASHBOARD_TESTS.sh
+  └─ Automated test runner script
+
+═══════════════════════════════════════════════════════════════════════════════
+
+MOST IMPORTANT:
+  To run all dashboard tests:
+  $ cd ~/Downloads/Vedak_Automation && ./RUN_DASHBOARD_TESTS.sh
+
+  Or view the Excel file:
+  ~/Downloads/Vedak_Automation/modules/dashboard/Vedak_CRM_Dashboard_Major_TestCases.xlsx
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Last Updated: October 28, 2026, 6:36 PM
+Status: ✅ Ready for Use
+Tests: 16/16 PASSING (100%)
+

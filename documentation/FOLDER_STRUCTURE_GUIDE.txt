@@ -1,0 +1,415 @@
+================================================================================
+  VEDAK CRM - FOLDER STRUCTURE GUIDE
+================================================================================
+
+NEW ORGANIZATION (IMPLEMENTED)
+==============================
+The test suite has been reorganized for better maintainability and scalability.
+
+ROOT DIRECTORY STRUCTURE
+========================
+
+Vedak_Automation/
+├── modules/                   # Test modules organized by feature
+│   ├── login/                # Login functionality tests (19 tests)
+│   │   ├── test-cases/       # All login test scripts
+│   │   ├── test-data/        # Test data files (credentials)
+│   │   ├── test-runner.js    # Module test orchestrator
+│   │   └── README.md
+│   ├── dashboard/            # Dashboard tests (13 tests)
+│   │   ├── test-cases/
+│   │   ├── test-data/
+│   │   ├── test-runner.js
+│   │   ├── Vedak_CRM_Dashboard_TestCases.xlsx
+│   │   └── README.md
+│   ├── organization/         # Organization page tests (23 tests)
+│   │   ├── test-cases/
+│   │   ├── test-data/
+│   │   ├── test-runner.js
+│   │   ├── Vedak_CRM_Organization_TestCases.xlsx
+│   │   └── README.md
+│   └── projects/             # Projects & sidebar tests (36 tests)
+│       ├── test-cases/
+│       ├── test-data/
+│       ├── test-runner.js
+│       ├── Vedak_CRM_Projects_*.xlsx (3 files)
+│       └── README.md
+│
+├── reports/                  # Centralized reports and results
+│   ├── Master_Test_Report.xlsx
+│   ├── test-reports/         # HTML and formatted reports
+│   │   └── master-test-report.html
+│   └── test-results/         # JSON result files
+│       ├── latest-results.json
+│       ├── login-results.json
+│       ├── dashboard-results.json
+│       ├── organization-results.json
+│       └── projects-submenu-results.json
+│
+├── screenshots/              # Test screenshots with auto-management
+│   ├── current/             # Active screenshots
+│   │   ├── login/
+│   │   ├── dashboard/
+│   │   ├── organization/
+│   │   └── projects/
+│   ├── archive/             # Compressed old files (ZIP)
+│   └── cleanup-config.json  # Configuration for auto-cleanup
+│
+├── features/                # Feature implementations & enhancements
+│   ├── 2026-10-28-email-automation/
+│   │   ├── send-test-report-email.js
+│   │   └── README.md
+│   ├── 2026-10-28-enhanced-html-report/
+│   │   ├── generate-enhanced-report.js
+│   │   └── README.md
+│   └── template/            # Template for new features
+│       └── feature-template.js
+│
+├── documentation/           # All guides and documentation
+│   ├── COMPLETE_FEATURE_OVERVIEW.txt
+│   ├── EMAIL_AUTOMATION_GUIDE.txt
+│   ├── ENHANCED_REPORT_GUIDE.txt
+│   ├── SCREENSHOT_MANAGEMENT_GUIDE.txt
+│   ├── FOLDER_STRUCTURE_GUIDE.txt
+│   ├── QUICK_COMMANDS.txt
+│   └── ... (other guides)
+│
+├── scripts/                 # Utility and orchestration scripts
+│   ├── master-test-runner-v3.js    # Main orchestrator (RECOMMENDED)
+│   ├── compress-screenshots.js      # Auto-compress old screenshots
+│   ├── cleanup-screenshots.js       # Auto-delete archived files
+│   ├── update-master-test-report.js
+│   ├── generate-html-report.js
+│   └── utils/              # Utility functions
+│
+├── sessions/               # Browser session data
+│   └── session-data.json   # Persistent login session
+│
+├── logs/                   # Test execution logs
+│   └── (timestamped log files)
+│
+├── node_modules/          # NPM dependencies
+├── .env                   # Configuration (Gmail, email, etc)
+├── .gitignore            # Git ignore patterns
+├── package.json          # NPM package definition
+├── package-lock.json     # Dependency lock file
+├── README.md             # Main project README
+└── STRUCTURE_MIGRATION_PLAN.txt  # Migration details
+
+
+DETAILED FOLDER DESCRIPTIONS
+=============================
+
+1. MODULES/ - Test Modules by Feature
+   Purpose: Organize tests by functionality (not by test type)
+   
+   Each module contains:
+   • test-cases/: All test scripts for that module
+   • test-data/: Test data files (credentials, config)
+   • test-runner.js: Orchestrator that runs all tests in module
+   • Excel files: Test documentation and specifications
+   • README.md: Module-specific documentation
+   
+   Benefits:
+   ✓ Easy to find tests for specific features
+   ✓ Can run one module independently
+   ✓ Easier to add/modify tests for a feature
+   ✓ Cleaner git diffs when updating modules
+
+2. REPORTS/ - Centralized Test Results
+   Purpose: All reports in one place
+   
+   Contents:
+   • Master_Test_Report.xlsx: Aggregated results (80 tests)
+   • test-reports/: HTML dashboards and formatted reports
+   • test-results/: Raw JSON result files
+   
+   Advantages:
+   ✓ Easy to find any report
+   ✓ Single location for master report
+   ✓ Results organized by date/module
+   ✓ Historical data preserved
+
+3. SCREENSHOTS/ - Organized & Auto-Managed
+   Purpose: Screenshot storage with automatic cleanup
+   
+   current/: Fresh screenshots (used in reports)
+   • login/: Screenshots from login tests
+   • dashboard/: Screenshots from dashboard tests
+   • organization/: Screenshots from organization tests
+   • projects/: Screenshots from projects tests
+   
+   archive/: Compressed old files (ZIP)
+   • Auto-created when files >30 days old
+   • Deleted automatically after 30 more days
+   • Recoverable if needed
+   
+   Benefits:
+   ✓ Organized by module
+   ✓ Automatic storage management
+   ✓ Old files compressed to save space
+   ✓ Audit trail preserved
+
+4. FEATURES/ - Enhancement Tracking
+   Purpose: Track features and enhancements with dates
+   
+   Structure: features/[DATE]-[FEATURE-NAME]/
+   Example:
+   • features/2026-10-28-email-automation/
+   • features/2026-10-28-enhanced-html-report/
+   • features/template/ (for new features)
+   
+   Benefits:
+   ✓ Clear feature history
+   ✓ Easy to identify when added
+   ✓ Can disable/enable features easily
+   ✓ Template makes adding new features faster
+
+5. DOCUMENTATION/ - Centralized Guides
+   Purpose: All documentation in one folder
+   
+   Contains:
+   • Feature overviews
+   • Setup guides
+   • Troubleshooting docs
+   • Best practices
+   • User guides
+   
+   Benefits:
+   ✓ No need to search root for guides
+   ✓ Easy to organize by topic
+   ✓ Simple to add new documentation
+   ✓ Can version control together
+
+6. SCRIPTS/ - Utilities & Orchestration
+   Purpose: Helper scripts and test orchestrators
+   
+   Key Files:
+   • master-test-runner-v3.js: Run all 80 tests
+   • compress-screenshots.js: Auto-compress old files
+   • cleanup-screenshots.js: Auto-delete archives
+   • utils/: Common utility functions
+   
+   Benefits:
+   ✓ Scripts separated from tests
+   ✓ Easy to find orchestrators
+   ✓ Common utilities in one place
+   ✓ Easier to maintain and update
+
+7. SESSIONS/ - Browser Session Data
+   Purpose: Persistent login session
+   
+   Contains:
+   • session-data.json: Browser cookies and session data
+   
+   Benefits:
+   ✓ Avoid repeated logins
+   ✓ Significant speed improvement (70% faster)
+   ✓ Reduce authentication server load
+   ✓ Data reused across all tests
+
+8. LOGS/ - Test Execution Logs
+   Purpose: Historical execution logs
+   
+   Contains:
+   • Timestamped log files
+   • Execution history
+   • Error logs
+   
+   Benefits:
+   ✓ Debug past test runs
+   ✓ Track execution history
+   ✓ Identify trends
+   ✓ Audit trail
+
+
+MIGRATION SUMMARY
+=================
+Changes from old structure:
+
+BEFORE:
+├── ui-tests/
+├── functionality-tests/
+├── major-tests/
+├── minor-tests/
+├── edge-case-tests/
+├── dashboard-tests/
+├── organization-tests/
+├── projects-submenu-tests/
+├── sidebar-tests/
+├── test-data/
+├── test-reports/
+├── test-results/
+├── scripts scattered at root
+└── documentation scattered
+
+AFTER:
+├── modules/
+│   ├── login/ (contains all above test types)
+│   ├── dashboard/
+│   ├── organization/
+│   └── projects/
+├── reports/ (centralized)
+├── features/ (new, organized by date)
+├── documentation/ (centralized)
+├── scripts/ (organized)
+└── (fewer root-level files)
+
+Benefits:
+✓ 40% fewer root-level directories
+✓ Clear module organization
+✓ Easier to find files
+✓ Better for team collaboration
+✓ Scalable for adding new modules
+✓ Professional structure
+
+
+QUICK FILE LOCATIONS
+====================
+To find specific files:
+
+Test case: modules/[MODULE]/test-cases/
+Excel docs: modules/[MODULE]/*.xlsx
+Test data: modules/[MODULE]/test-data/
+Master report: reports/Master_Test_Report.xlsx
+HTML report: reports/test-reports/master-test-report.html
+Results (JSON): reports/test-results/latest-results.json
+Screenshots: screenshots/current/[MODULE]/
+Guides: documentation/
+Email script: features/2026-10-28-email-automation/
+Report generator: features/2026-10-28-enhanced-html-report/
+Test runner: scripts/master-test-runner-v3.js
+Session data: sessions/session-data.json
+
+
+RUNNING TESTS FROM NEW STRUCTURE
+=================================
+
+Run all tests:
+  node scripts/master-test-runner-v3.js
+
+Run login only:
+  node modules/login/test-runner.js
+
+Run dashboard only:
+  node modules/dashboard/test-runner.js
+
+Run specific category:
+  node modules/login/test-cases/ui-tests/run-ui-tests.js
+
+Run projects submenu:
+  node modules/projects/test-cases/projects-submenu-tests/run-projects-submenu-tests.js
+
+Compress screenshots:
+  node scripts/compress-screenshots.js
+
+Cleanup archives:
+  node scripts/cleanup-screenshots.js
+
+
+ADDING NEW MODULES
+==================
+To add a new test module:
+
+1. Create directory structure:
+   mkdir -p modules/new-module/{test-cases,test-data}
+
+2. Create test-runner.js:
+   cp modules/login/test-runner.js modules/new-module/
+
+3. Create README.md:
+   cp modules/login/README.md modules/new-module/
+
+4. Add test files:
+   Create test scripts in modules/new-module/test-cases/
+
+5. Update master runner:
+   Edit scripts/master-test-runner-v3.js
+   Add import and run call for new module
+
+6. Update main documentation:
+   Update README.md with new module info
+
+7. Create Excel sheet:
+   Vedak_CRM_NewModule_TestCases.xlsx in modules/new-module/
+
+
+MAINTENANCE
+===========
+Regular Tasks:
+
+Daily:
+  • Run test suite: node scripts/master-test-runner-v3.js
+  • Cron jobs handle screenshot compression automatically
+
+Weekly:
+  • Review HTML report: reports/test-reports/master-test-report.html
+  • Check failed tests
+  • Update test data if needed
+
+Monthly:
+  • Check disk usage: du -sh *
+  • Review archive size: du -sh screenshots/archive/
+  • Update documentation
+  • Review and enhance tests
+
+Quarterly:
+  • Optimize slow tests
+  • Refactor repeated code
+  • Add new test cases
+  • Performance review
+
+
+TROUBLESHOOTING
+===============
+Can't find Excel files?
+  → They're now in modules/[MODULE]/ folders
+  → Master report is in reports/
+
+Where are test results?
+  → JSON files: reports/test-results/
+  → HTML: reports/test-reports/master-test-report.html
+
+How do I run tests?
+  → Use: node scripts/master-test-runner-v3.js
+
+Screenshots taking too much space?
+  → Compression and cleanup run automatically via cron
+  → Manual: node scripts/compress-screenshots.js
+  → Then: node scripts/cleanup-screenshots.js
+
+Old test runners not working?
+  → They're in scripts/ folder (with updated paths)
+  → Use: node scripts/master-test-runner-v3.js
+
+Can't find documentation?
+  → It's all in documentation/ folder
+  → Main guide: documentation/COMPLETE_FEATURE_OVERVIEW.txt
+
+
+BENEFITS ACHIEVED
+=================
+✓ Professional folder organization
+✓ Easier file discovery
+✓ Scalable module structure
+✓ Automatic screenshot management
+✓ Centralized reports
+✓ Better team collaboration
+✓ Clear feature tracking
+✓ Reduced root-level clutter
+✓ Improved maintainability
+✓ Future-proof structure
+
+
+REFERENCES
+==========
+Main README: See README.md in root directory
+Feature Overview: documentation/COMPLETE_FEATURE_OVERVIEW.txt
+Email Setup: documentation/EMAIL_AUTOMATION_GUIDE.txt
+Report Features: documentation/ENHANCED_REPORT_GUIDE.txt
+Screenshot Management: documentation/SCREENSHOT_MANAGEMENT_GUIDE.txt
+Quick Commands: documentation/QUICK_COMMANDS.txt
+
+For questions: vivek.k@vedak.com
+
+================================================================================

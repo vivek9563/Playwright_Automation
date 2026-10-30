@@ -1,0 +1,46 @@
+{
+  "devices": [
+    {
+      "name": "Desktop - HD",
+      "resolution": "1920x1080",
+      "dpi": "96",
+      "type": "desktop",
+      "status": "primary"
+    },
+    {
+      "name": "Desktop - HD+",
+      "resolution": "1366x768",
+      "dpi": "96",
+      "type": "desktop",
+      "status": "secondary"
+    },
+    {
+      "name": "Tablet - Portrait",
+      "resolution": "768x1024",
+      "dpi": "150",
+      "type": "tablet",
+      "status": "test"
+    },
+    {
+      "name": "Tablet - Landscape",
+      "resolution": "1024x768",
+      "dpi": "150",
+      "type": "tablet",
+      "status": "test"
+    },
+    {
+      "name": "Mobile - iPhone",
+      "resolution": "375x667",
+      "dpi": "326",
+      "type": "mobile",
+      "status": "test"
+    },
+    {
+      "name": "Mobile - Android",
+      "resolution": "414x896",
+      "dpi": "326",
+      "type": "mobile",
+      "status": "test"
+    }
+  ]
+}

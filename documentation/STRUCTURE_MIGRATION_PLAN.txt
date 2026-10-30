@@ -1,0 +1,92 @@
+PHASE 1: CREATE NEW FOLDER STRUCTURE
+====================================
+
+New Structure to Create:
+========================
+modules/
+  ├── login/
+  │   ├── test-cases/
+  │   ├── test-data/
+  │   ├── test-runner.js
+  │   └── README.md
+  ├── dashboard/
+  │   ├── test-cases/
+  │   ├── test-data/
+  │   ├── test-runner.js
+  │   └── README.md
+  ├── organization/
+  │   ├── test-cases/
+  │   ├── test-data/
+  │   ├── test-runner.js
+  │   └── README.md
+  └── projects/
+      ├── test-cases/
+      ├── test-data/
+      ├── test-runner.js
+      └── README.md
+
+reports/
+  ├── Master_Test_Report.xlsx
+  ├── test-reports/
+  └── test-results/
+
+screenshots/
+  ├── current/
+  │   ├── login/
+  │   ├── dashboard/
+  │   ├── organization/
+  │   └── projects/
+  └── archive/
+
+features/
+  ├── 2026-10-28-email-automation/
+  ├── 2026-10-28-enhanced-html-report/
+  └── template/
+
+documentation/
+
+scripts/
+
+FILES TO MOVE:
+==============
+Login Module:
+  - ui-tests/ → modules/login/test-cases/
+  - functionality-tests/ → modules/login/test-cases/
+  - major-tests/ → modules/login/test-cases/
+  - minor-tests/ → modules/login/test-cases/
+  - edge-case-tests/ → modules/login/test-cases/
+  - test-data/valid-accounts.json → modules/login/test-data/
+  - test-data/invalid-accounts.json → modules/login/test-data/
+
+Dashboard Module:
+  - dashboard-tests/ → modules/dashboard/test-cases/
+  - test-data/dashboard-test-data.json → modules/dashboard/test-data/
+
+Organization Module:
+  - organization-tests/ → modules/organization/test-cases/
+
+Projects Module:
+  - projects-submenu-tests/ → modules/projects/test-cases/
+  - sidebar-tests/ → modules/projects/test-cases/ (sidebar is part of projects menu)
+
+Reports:
+  - Master_Test_Report.xlsx → reports/
+  - test-reports/ → reports/test-reports/
+  - test-results/ → reports/test-results/
+
+Screenshots:
+  - screenshots/* → screenshots/current/[module]/
+
+Features:
+  - send-test-report-email.js → features/2026-10-28-email-automation/
+  - generate-enhanced-report.js → features/2026-10-28-enhanced-html-report/
+
+Documentation:
+  - *.txt files → documentation/
+
+Excel Files to Move to Modules:
+  - Vedak_CRM_Dashboard_TestCases.xlsx → modules/dashboard/
+  - Vedak_CRM_Organization_TestCases.xlsx → modules/organization/
+  - Vedak_CRM_Projects_Submenu_TestCases.xlsx → modules/projects/
+  - Vedak_CRM_Sidebar_TestCases.xlsx → modules/projects/
+  - Vedak_CRM_Projects_Menu_TestCases.xlsx → modules/projects/
