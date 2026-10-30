@@ -1,0 +1,28 @@
+{
+  "organization": {
+    "buttons": [
+      "Apply Leave",
+      "Calendar",
+      "Notice Board",
+      "Organization",
+      "Support",
+      "Vedak Policies",
+      "HR Playbook",
+      "Refill Credits"
+    ],
+    "navigation": {
+      "noticeboard_url": "http://localhost:5173/app/noticeboard",
+      "dashboard_url": "http://localhost:5173/app/dashboard"
+    },
+    "test_scenarios": {
+      "card_hover": {
+        "waitTime": 2000,
+        "scrollBuffer": 100
+      },
+      "content_read": {
+        "retries": 3,
+        "timeout": 5000
+      }
+    }
+  }
+}

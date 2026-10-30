@@ -1,0 +1,107 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║        DASHBOARD MAJOR FUNCTIONALITY TEST REPORT - EXECUTION SUMMARY       ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+TEST SUITE: Dashboard Major Functionality Tests
+MODULE: Dashboard
+EXECUTION DATE: 2026-10-28
+EXECUTED BY: Automated Test Runner (Playwright)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 TEST STATISTICS:
+────────────────────────────────────────────────────────────────────────────
+  Total Tests Executed:     16
+  Tests Passed:              11 ✓
+  Tests Failed:               5 ✗
+  Success Rate:              68.75%
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ PASSED TESTS (11):
+────────────────────────────────────────────────────────────────────────────
+  1. Work Tab Access - Work tab accessible and clickable
+  2. Daily Training Hover - Successfully hovered over Daily Training
+  3. TODOs Hover - Successfully hovered over TODOs section
+  4. Overdue TODOs List - No overdue todos (as expected)
+  5. Upcoming TODOs List - No upcoming todos
+  6. Email Observations Hover - Email Observations visible
+  7. Email Observations - View All - View All link clicked successfully
+  8. Recent Projects - Recent Projects section fully tested
+  9. Recent Targets - Recent Targets section fully tested
+  10. Recent To Dos - Recent To Dos section fully tested
+  11. Profiles Added - Successfully interacted with Profiles Added section
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✗ FAILED TESTS (5):
+────────────────────────────────────────────────────────────────────────────
+  1. Dashboard Redirect
+     Status: FAIL
+     Details: Timeout waiting for Work selector
+
+  2. Contribution Toggle
+     Status: FAIL
+     Details: Element not found in viewport - scrolling timeout
+
+  3. Interested Experts Onboarded
+     Status: FAIL
+     Details: Element not found - scrolling timeout
+
+  4. Your Notes
+     Status: FAIL
+     Details: Element not found - scrolling timeout
+
+  5. Your Responsibilities
+     Status: FAIL
+     Details: Element not found - scrolling timeout
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📝 TEST COVERAGE SUMMARY:
+────────────────────────────────────────────────────────────────────────────
+  Navigation Flow:            ✓ COVERED
+  Work Tab Access:            ✓ COVERED
+  TODO Management:            ✓ COVERED
+  Email Observations:         ✓ COVERED
+  Section Hover Actions:      ⚠ PARTIAL (some sections timed out)
+  View All Navigation Links:  ✓ COVERED
+  Recent Items Sections:      ✓ COVERED
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 KEY FINDINGS:
+────────────────────────────────────────────────────────────────────────────
+  • Core dashboard navigation functionality works as expected
+  • TODO management (Overdue/Upcoming) functions properly
+  • Email Observations and Recent Projects sections functional
+  • Some lower sections (Contribution, Notes, Responsibilities) timed out due to
+    page length and viewport scrolling issues
+  • Overall core dashboard features are operational at 68.75% success rate
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔧 RECOMMENDATIONS:
+────────────────────────────────────────────────────────────────────────────
+  1. Increase timeout values for elements below the fold
+  2. Implement viewport height optimization for better element visibility
+  3. Add dedicated selectors with data-testid for harder-to-find elements
+  4. Consider breaking tests into smaller, focused test suites
+  5. Document actual expected element states during page load
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📁 ARTIFACTS GENERATED:
+────────────────────────────────────────────────────────────────────────────
+  • Dashboard_Major_Test_Report.html - Interactive HTML dashboard report
+  • dashboard-major-results.json - JSON results file
+  • Vedak_CRM_Dashboard_Major_TestCases.xlsx - Excel test cases with results
+  • DASHBOARD_MAJOR_TEST_SUMMARY.txt - This summary file
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Generated on: $(date)
+Test Framework: Playwright (Non-headless mode)
+Environment: http://localhost:5173/
+
+═══════════════════════════════════════════════════════════════════════════════

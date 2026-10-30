@@ -1,0 +1,500 @@
+{
+  "testCases": [
+    {
+      "id": "DASH-UI-01",
+      "category": "UI",
+      "name": "Dashboard Page Loads Successfully",
+      "description": "Verify dashboard page loads with all required UI elements",
+      "precondition": "User is logged in with valid vedak.com credentials",
+      "steps": [
+        "Login successfully with vedak.com email",
+        "Verify redirect to dashboard page",
+        "Check page title contains 'Dashboard' or similar",
+        "Verify sidebar/navigation is visible",
+        "Check main content area is displayed"
+      ],
+      "expectedResult": "Dashboard page loads with all UI elements visible and properly rendered"
+    },
+    {
+      "id": "DASH-UI-02",
+      "category": "UI",
+      "name": "Vedak Logo Visibility and Clickability",
+      "description": "Verify Vedak logo is visible and clickable on dashboard",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Locate Vedak logo on page",
+        "Verify logo is visible and properly rendered",
+        "Check logo is clickable (cursor changes to pointer)"
+      ],
+      "expectedResult": "Vedak logo is visible, properly rendered, and shows hover effect"
+    },
+    {
+      "id": "DASH-FUNC-01",
+      "category": "Functionality",
+      "name": "Click Vedak Logo Redirect",
+      "description": "Verify clicking Vedak logo redirects to home/dashboard",
+      "precondition": "User is on dashboard page with logo visible",
+      "steps": [
+        "Click on Vedak logo",
+        "Wait for page navigation",
+        "Check current URL and page title",
+        "Verify redirect is successful"
+      ],
+      "expectedResult": "User is redirected to home/dashboard page after clicking logo"
+    },
+    {
+      "id": "DASH-FUNC-02",
+      "category": "Functionality",
+      "name": "Page Refresh Functionality",
+      "description": "Verify page refresh works without losing data/session",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Get current page URL",
+        "Refresh the page using F5 or browser refresh",
+        "Wait for page to fully load",
+        "Verify page reloads with same URL",
+        "Check all elements are still visible"
+      ],
+      "expectedResult": "Page refreshes successfully, retains session, and all data persists"
+    },
+    {
+      "id": "DASH-FUNC-03",
+      "category": "Functionality",
+      "name": "Work/Organization Button Navigation",
+      "description": "Verify Work/Organization button redirects to correct page",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Locate Work/Organization button",
+        "Click on Work/Organization button",
+        "Wait for page navigation",
+        "Verify URL changes to organization/work page",
+        "Check page title and content"
+      ],
+      "expectedResult": "User is redirected to Work/Organization page with correct content"
+    },
+    {
+      "id": "DASH-UI-03",
+      "category": "UI",
+      "name": "Daily Training Widget Hover Effect",
+      "description": "Verify Daily Training widget displays hover effect",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Locate Daily Training widget",
+        "Move mouse over Daily Training widget",
+        "Observe hover styling",
+        "Move mouse away",
+        "Check hover effect is removed"
+      ],
+      "expectedResult": "Daily Training widget shows clear hover effect with visual feedback"
+    },
+    {
+      "id": "DASH-UI-04",
+      "category": "UI",
+      "name": "Last 30 Days Section Hover Effect",
+      "description": "Verify Last 30 days section shows hover effect",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Locate Last 30 days section",
+        "Hover over Last 30 days section",
+        "Verify hover styling is applied",
+        "Check data/content in section"
+      ],
+      "expectedResult": "Last 30 days section shows proper hover effect and displays data"
+    },
+    {
+      "id": "DASH-UI-05",
+      "category": "UI",
+      "name": "Todos Widget Visibility",
+      "description": "Verify Todos widget is visible and properly rendered",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Locate Todos widget",
+        "Verify widget is visible",
+        "Check widget contains todo items or empty state",
+        "Hover over widget to see effects"
+      ],
+      "expectedResult": "Todos widget is visible with proper formatting and displays todo items"
+    },
+    {
+      "id": "DASH-UI-06",
+      "category": "UI",
+      "name": "Email Observations Widget Hover",
+      "description": "Verify Email Observations widget shows hover effect",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Locate Email Observations widget",
+        "Hover over Email Observations widget",
+        "Verify hover styling",
+        "Check widget displays observation data"
+      ],
+      "expectedResult": "Email Observations widget shows hover effect and displays data correctly"
+    },
+    {
+      "id": "DASH-FUNC-04",
+      "category": "Functionality",
+      "name": "View All Button Click - Daily Training",
+      "description": "Verify View All button works for Daily Training section",
+      "precondition": "User is on dashboard page with Daily Training widget visible",
+      "steps": [
+        "Locate and hover over Daily Training widget",
+        "Find and click View All button",
+        "Wait for page navigation or modal",
+        "Verify complete list is displayed"
+      ],
+      "expectedResult": "View All button navigates to complete Daily Training page/list"
+    },
+    {
+      "id": "DASH-FUNC-05",
+      "category": "Functionality",
+      "name": "View All Button Click - Todos",
+      "description": "Verify View All button works for Todos section",
+      "precondition": "User is on dashboard with Todos widget visible",
+      "steps": [
+        "Locate Todos widget",
+        "Find and click View All button",
+        "Wait for navigation",
+        "Verify all todos are displayed"
+      ],
+      "expectedResult": "View All redirects to complete Todos page with all items"
+    },
+    {
+      "id": "DASH-FUNC-06",
+      "category": "Functionality",
+      "name": "View All Button Click - Observations",
+      "description": "Verify View All button works for Email Observations",
+      "precondition": "User is on dashboard with Observations widget visible",
+      "steps": [
+        "Locate Email Observations widget",
+        "Click View All button",
+        "Wait for page load",
+        "Verify all observations displayed"
+      ],
+      "expectedResult": "View All navigates to complete Observations page/list"
+    },
+    {
+      "id": "DASH-FUNC-07",
+      "category": "Functionality",
+      "name": "Contribution Last 30 Days Toggle",
+      "description": "Verify Last 30d toggle in Contribution section works",
+      "precondition": "User is on dashboard with Contribution section visible",
+      "steps": [
+        "Locate Contribution section",
+        "Find Last 30d toggle button",
+        "Click Last 30d toggle",
+        "Verify data updates for last 30 days",
+        "Check chart/stats update"
+      ],
+      "expectedResult": "Last 30d toggle filters data correctly and updates display"
+    },
+    {
+      "id": "DASH-FUNC-08",
+      "category": "Functionality",
+      "name": "Contribution Monthly Toggle",
+      "description": "Verify Monthly toggle in Contribution section works",
+      "precondition": "User is on dashboard with Contribution section visible",
+      "steps": [
+        "Locate Contribution section",
+        "Find Monthly toggle button",
+        "Click Monthly toggle",
+        "Verify data updates for monthly view",
+        "Compare with Last 30d data"
+      ],
+      "expectedResult": "Monthly toggle correctly switches view and displays monthly data"
+    },
+    {
+      "id": "DASH-MAJOR-01",
+      "category": "Major",
+      "name": "Page Scroll Down Functionality",
+      "description": "Verify page can scroll down to reveal more content",
+      "precondition": "User is on dashboard page at top",
+      "steps": [
+        "Note initial scroll position (should be top)",
+        "Scroll down the page",
+        "Verify scroll position changes",
+        "Check new content becomes visible",
+        "Verify no scroll errors occur"
+      ],
+      "expectedResult": "Page scrolls down smoothly and reveals additional content"
+    },
+    {
+      "id": "DASH-MAJOR-02",
+      "category": "Major",
+      "name": "Page Scroll Up Functionality",
+      "description": "Verify page can scroll up from bottom",
+      "precondition": "User is on dashboard page scrolled down",
+      "steps": [
+        "Scroll down to bottom of page",
+        "Scroll up towards top",
+        "Verify scroll position decreases",
+        "Check top content is visible again",
+        "Verify no scroll errors"
+      ],
+      "expectedResult": "Page scrolls up smoothly and original content is visible"
+    },
+    {
+      "id": "DASH-UI-07",
+      "category": "UI",
+      "name": "Interested Experts Onboarded Widget Visibility",
+      "description": "Verify Interested Experts Onboarded widget is visible when scrolled",
+      "precondition": "User scrolled to widget section",
+      "steps": [
+        "Scroll down to Interested Experts section",
+        "Verify widget is visible",
+        "Check widget displays expert list",
+        "Hover over widget to see effects"
+      ],
+      "expectedResult": "Widget is visible with expert list displayed and hover effects work"
+    },
+    {
+      "id": "DASH-FUNC-09",
+      "category": "Functionality",
+      "name": "Interested Experts Refresh Button",
+      "description": "Verify refresh button in Interested Experts widget works",
+      "precondition": "User is viewing Interested Experts widget",
+      "steps": [
+        "Locate refresh button in widget",
+        "Click refresh button",
+        "Wait for data refresh",
+        "Verify expert list updates or reloads",
+        "Check no errors occur"
+      ],
+      "expectedResult": "Refresh button reloads expert data without errors"
+    },
+    {
+      "id": "DASH-UI-08",
+      "category": "UI",
+      "name": "Your Notes Widget Visibility and Hover",
+      "description": "Verify Your Notes widget is visible and shows hover effect",
+      "precondition": "User scrolled to Your Notes section",
+      "steps": [
+        "Scroll to Your Notes widget",
+        "Verify widget is visible",
+        "Hover over Your Notes widget",
+        "Check hover styling",
+        "Verify edit/add button is visible"
+      ],
+      "expectedResult": "Your Notes widget is visible with hover effects and add/edit button"
+    },
+    {
+      "id": "DASH-FUNC-10",
+      "category": "Functionality",
+      "name": "Add Notes to Your Notes Widget",
+      "description": "Verify users can add notes and they are saved",
+      "precondition": "User is viewing Your Notes widget",
+      "steps": [
+        "Click add/edit button in Your Notes",
+        "Enter test note text",
+        "Click save button",
+        "Wait for save confirmation",
+        "Verify note appears in widget",
+        "Refresh page and verify note persists"
+      ],
+      "expectedResult": "Notes are saved successfully and persist after page refresh"
+    },
+    {
+      "id": "DASH-UI-09",
+      "category": "UI",
+      "name": "Your Responsibilities Widget Hover",
+      "description": "Verify Your Responsibilities widget shows hover effect",
+      "precondition": "User scrolled to Responsibilities section",
+      "steps": [
+        "Scroll to Your Responsibilities widget",
+        "Verify widget is visible",
+        "Hover over widget",
+        "Check hover styling is applied",
+        "Verify content is readable"
+      ],
+      "expectedResult": "Your Responsibilities widget displays with proper hover effects"
+    },
+    {
+      "id": "DASH-UI-10",
+      "category": "UI",
+      "name": "Recent Projects Widget Visibility",
+      "description": "Verify Recent Projects widget is visible on dashboard",
+      "precondition": "User scrolled to Recent Projects section",
+      "steps": [
+        "Scroll to Recent Projects widget",
+        "Verify widget is visible",
+        "Check projects are displayed in list",
+        "Hover over widget to see effects",
+        "Verify View All button is present"
+      ],
+      "expectedResult": "Recent Projects widget displays with project list and View All button"
+    },
+    {
+      "id": "DASH-FUNC-11",
+      "category": "Functionality",
+      "name": "Recent Projects View All Navigation",
+      "description": "Verify View All button navigates to all projects page",
+      "precondition": "User viewing Recent Projects widget with View All button",
+      "steps": [
+        "Click View All button in Recent Projects",
+        "Wait for page navigation",
+        "Verify URL changes to projects page",
+        "Check all projects are displayed",
+        "Verify page title indicates projects"
+      ],
+      "expectedResult": "View All navigates to complete projects page"
+    },
+    {
+      "id": "DASH-UI-11",
+      "category": "UI",
+      "name": "Recent Target Widget Hover Effect",
+      "description": "Verify Recent Target widget shows hover effect",
+      "precondition": "User scrolled to Recent Target section",
+      "steps": [
+        "Scroll to Recent Target widget",
+        "Verify widget is visible",
+        "Hover over widget",
+        "Check hover styling",
+        "Verify View All button is visible"
+      ],
+      "expectedResult": "Recent Target widget displays with hover effect and View All button"
+    },
+    {
+      "id": "DASH-FUNC-12",
+      "category": "Functionality",
+      "name": "Recent Target View All Navigation",
+      "description": "Verify View All button works for Recent Target",
+      "precondition": "User viewing Recent Target widget",
+      "steps": [
+        "Click View All button in Recent Target",
+        "Wait for page load",
+        "Verify navigation to targets page",
+        "Check all targets displayed",
+        "Verify page content is correct"
+      ],
+      "expectedResult": "View All navigates to complete targets/goals page"
+    },
+    {
+      "id": "DASH-UI-12",
+      "category": "UI",
+      "name": "Recent To Dos Widget Visibility",
+      "description": "Verify Recent To Dos widget is visible and properly rendered",
+      "precondition": "User scrolled to Recent To Dos section",
+      "steps": [
+        "Scroll to Recent To Dos widget",
+        "Verify widget is visible",
+        "Check todo items are displayed",
+        "Hover over widget",
+        "Verify View All button is present"
+      ],
+      "expectedResult": "Recent To Dos widget displays correctly with items and View All button"
+    },
+    {
+      "id": "DASH-FUNC-13",
+      "category": "Functionality",
+      "name": "Recent To Dos View All Navigation",
+      "description": "Verify View All button navigates to all todos page",
+      "precondition": "User viewing Recent To Dos widget",
+      "steps": [
+        "Click View All button in Recent To Dos",
+        "Wait for navigation",
+        "Verify URL changes to todos page",
+        "Check all todos are displayed",
+        "Verify page loads correctly"
+      ],
+      "expectedResult": "View All navigates to complete todos list page"
+    },
+    {
+      "id": "DASH-UI-13",
+      "category": "UI",
+      "name": "Profiles Added Widget Visibility",
+      "description": "Verify Profiles Added widget is visible at bottom",
+      "precondition": "User scrolled to bottom of dashboard",
+      "steps": [
+        "Scroll to bottom of page",
+        "Locate Profiles Added widget",
+        "Verify widget is visible",
+        "Check profile list is displayed",
+        "Hover over widget"
+      ],
+      "expectedResult": "Profiles Added widget is visible at bottom with profile list"
+    },
+    {
+      "id": "DASH-MAJOR-03",
+      "category": "Major",
+      "name": "Complete Dashboard Navigation Flow",
+      "description": "Verify complete flow of navigating dashboard sections",
+      "precondition": "User is logged in on dashboard",
+      "steps": [
+        "Start at top of dashboard",
+        "Navigate through each major section",
+        "Click View All buttons where present",
+        "Use back button to return to dashboard",
+        "Verify session persists throughout"
+      ],
+      "expectedResult": "Complete navigation flow works smoothly with session persistence"
+    },
+    {
+      "id": "DASH-EDGE-01",
+      "category": "Edge Cases",
+      "name": "Rapid Section Hovers",
+      "description": "Verify dashboard handles rapid mouse hovering over sections",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Rapidly hover over multiple widgets",
+        "Move mouse quickly between sections",
+        "Verify no UI glitches or freezes",
+        "Check all hover effects trigger correctly"
+      ],
+      "expectedResult": "Dashboard handles rapid hovers without freezing or glitches"
+    },
+    {
+      "id": "DASH-EDGE-02",
+      "category": "Edge Cases",
+      "name": "Rapid Scroll Up and Down",
+      "description": "Verify dashboard handles rapid scrolling",
+      "precondition": "User is on dashboard page",
+      "steps": [
+        "Rapidly scroll up and down",
+        "Check for content loading issues",
+        "Verify no memory leaks or lag",
+        "Check all content loads correctly"
+      ],
+      "expectedResult": "Dashboard handles rapid scrolling smoothly without lag"
+    },
+    {
+      "id": "DASH-EDGE-03",
+      "category": "Edge Cases",
+      "name": "Rapid View All Button Clicks",
+      "description": "Verify dashboard handles rapid View All button clicks",
+      "precondition": "User is on dashboard with View All buttons visible",
+      "steps": [
+        "Click multiple View All buttons rapidly",
+        "Verify only one navigation occurs",
+        "Check for error messages",
+        "Verify page loads correctly"
+      ],
+      "expectedResult": "Dashboard handles rapid clicks gracefully without errors"
+    },
+    {
+      "id": "DASH-MINOR-01",
+      "category": "Minor",
+      "name": "Dashboard Performance Check",
+      "description": "Verify dashboard loads within acceptable time",
+      "precondition": "User is on login page",
+      "steps": [
+        "Measure time from login click to dashboard visible",
+        "Check page load time < 5 seconds",
+        "Verify all elements load within time",
+        "Check no broken images or missing content"
+      ],
+      "expectedResult": "Dashboard loads within 5 seconds with all content visible"
+    },
+    {
+      "id": "DASH-MINOR-02",
+      "category": "Minor",
+      "name": "Dashboard Responsiveness Check",
+      "description": "Verify dashboard elements are responsive on hover",
+      "precondition": "User is on dashboard",
+      "steps": [
+        "Check hover response time for widgets",
+        "Verify buttons respond to clicks immediately",
+        "Check scroll smoothness",
+        "Verify no lag in animations"
+      ],
+      "expectedResult": "All dashboard elements respond immediately to user interactions"
+    }
+  ]
+}

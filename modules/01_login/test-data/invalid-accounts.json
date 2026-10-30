@@ -1,0 +1,46 @@
+{
+  "invalidAccounts": [
+    {
+      "email": "user@gmail.com",
+      "domain": "gmail.com",
+      "status": "invalid",
+      "reason": "Not vedak.com domain",
+      "expectedError": "Access Denied: Only vedak.com domain emails are allowed"
+    },
+    {
+      "email": "test@yahoo.com",
+      "domain": "yahoo.com",
+      "status": "invalid",
+      "reason": "Not vedak.com domain",
+      "expectedError": "Access Denied: Only vedak.com domain emails are allowed"
+    },
+    {
+      "email": "user@company.com",
+      "domain": "company.com",
+      "status": "invalid",
+      "reason": "Corporate domain, not vedak.com",
+      "expectedError": "Access Denied: Only vedak.com domain emails are allowed"
+    },
+    {
+      "email": "admin@vedak.co.in",
+      "domain": "vedak.co.in",
+      "status": "invalid",
+      "reason": "Similar but different domain",
+      "expectedError": "Access Denied: Only vedak.com domain emails are allowed"
+    },
+    {
+      "email": "test@vedaktech.com",
+      "domain": "vedaktech.com",
+      "status": "invalid",
+      "reason": "Contains vedak but wrong domain",
+      "expectedError": "Access Denied: Only vedak.com domain emails are allowed"
+    },
+    {
+      "email": "user@outlook.com",
+      "domain": "outlook.com",
+      "status": "invalid",
+      "reason": "Not vedak.com domain",
+      "expectedError": "Access Denied: Only vedak.com domain emails are allowed"
+    }
+  ]
+}

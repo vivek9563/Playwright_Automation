@@ -1,0 +1,39 @@
+{
+  "validAccounts": [
+    {
+      "email": "vivek.k@vedak.com",
+      "domain": "vedak.com",
+      "status": "valid",
+      "purpose": "Primary test account",
+      "expectedResult": "Login successful"
+    },
+    {
+      "email": "test.user@vedak.com",
+      "domain": "vedak.com",
+      "status": "valid",
+      "purpose": "Secondary test account",
+      "expectedResult": "Login successful"
+    },
+    {
+      "email": "admin@vedak.com",
+      "domain": "vedak.com",
+      "status": "valid",
+      "purpose": "Admin test account",
+      "expectedResult": "Login successful"
+    },
+    {
+      "email": "qa.engineer@vedak.com",
+      "domain": "vedak.com",
+      "status": "valid",
+      "purpose": "QA team account",
+      "expectedResult": "Login successful"
+    },
+    {
+      "email": "dev.lead@vedak.com",
+      "domain": "vedak.com",
+      "status": "valid",
+      "purpose": "Developer team account",
+      "expectedResult": "Login successful"
+    }
+  ]
+}

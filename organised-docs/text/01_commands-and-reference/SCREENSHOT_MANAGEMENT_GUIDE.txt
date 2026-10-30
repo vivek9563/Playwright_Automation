@@ -1,0 +1,253 @@
+================================================================================
+  VEDAK CRM - SCREENSHOT MANAGEMENT GUIDE
+================================================================================
+
+OVERVIEW
+========
+The automated test suite captures screenshots during execution for debugging and
+documentation. This guide explains how screenshots are organized, managed, and
+automatically archived.
+
+FOLDER STRUCTURE
+================
+screenshots/
+├── current/                  # Active screenshots from recent test runs
+│   ├── login/               # Login module screenshots
+│   ├── dashboard/           # Dashboard module screenshots
+│   ├── organization/        # Organization module screenshots
+│   └── projects/            # Projects module screenshots
+└── archive/                 # Compressed ZIP archives (30+ day old files)
+
+SCREENSHOT LIFECYCLE
+====================
+1. TEST EXECUTION
+   • Tests capture screenshots to screenshots/current/[module]/
+   • Organized by module for easy access
+   • Named with test ID and timestamp
+   • Examples: DASH-FUNC-01.png, DASH-UI-01.png, etc.
+
+2. INITIAL RETENTION (Days 0-30)
+   • Screenshots kept in current/ for quick reference
+   • Used in HTML reports and dashboards
+   • Easily accessible for analysis
+   • Storage: ~50-500 MB depending on test volume
+
+3. COMPRESSION (Day 30+)
+   • Run: node scripts/compress-screenshots.js
+   • Files older than 30 days compressed to ZIP
+   • One ZIP per module (login-screenshots-*.zip, etc.)
+   • Compression ratio: ~80-90% (PNG→ZIP)
+   • Moved to screenshots/archive/
+
+4. ARCHIVAL (Day 60+)
+   • Compressed archives older than 30 more days are deleted
+   • Run: node scripts/cleanup-screenshots.js
+   • Releases storage space
+   • Original compressed files are permanently removed
+
+AUTOMATIC MANAGEMENT
+====================
+Screenshots are automatically managed through cron jobs (Linux/Mac):
+
+Setup Cron Jobs (Recommended):
+  1. Open crontab: crontab -e
+  2. Add these lines:
+     # Daily screenshot compression at 1 AM
+     0 1 * * * cd ~/Downloads/Vedak_Automation && node scripts/compress-screenshots.js
+     
+     # Daily screenshot cleanup at 2 AM
+     0 2 * * * cd ~/Downloads/Vedak_Automation && node scripts/cleanup-screenshots.js
+
+Manual Commands:
+  • Compress now: node scripts/compress-screenshots.js
+  • Cleanup now: node scripts/cleanup-screenshots.js
+
+MANUAL SCREENSHOT MANAGEMENT
+==============================
+Delete Screenshots Manually:
+  # Delete all login screenshots
+  rm -rf screenshots/current/login/*
+  
+  # Delete all archived files
+  rm -rf screenshots/archive/*
+  
+  # Delete specific screenshot
+  rm screenshots/current/dashboard/DASH-FUNC-01.png
+
+Archive Manually:
+  # Create ZIP of dashboard screenshots
+  cd screenshots/current/dashboard
+  zip -r ../../archive/manual-backup-$(date +%s).zip *.png
+
+Restore from Archive:
+  # Extract archived screenshots
+  unzip screenshots/archive/login-screenshots-*.zip -d screenshots/current/login/
+
+CONFIGURATION
+==============
+Edit screenshots/cleanup-config.json to customize:
+  
+  compression.enabled: true/false          # Enable/disable compression
+  compression.age_days: 30                 # Days before compression
+  cleanup.enabled: true/false              # Enable/disable cleanup
+  cleanup.age_days: 30                     # Days before archive deletion
+
+Example configuration:
+  {
+    "compression": {
+      "enabled": true,
+      "age_days": 30
+    },
+    "cleanup": {
+      "enabled": true,
+      "age_days": 30
+    }
+  }
+
+TROUBLESHOOTING
+===============
+Compression Not Working:
+  ✓ Check permissions: ls -la screenshots/
+  ✓ Verify archiver package: npm list archiver
+  ✓ Run manually: node scripts/compress-screenshots.js
+  ✓ Check disk space: df -h
+
+Cleanup Not Working:
+  ✓ Verify archive directory exists: ls -la screenshots/archive/
+  ✓ Check file permissions: ls -la screenshots/archive/*.zip
+  ✓ Run manually: node scripts/cleanup-screenshots.js
+
+Disk Space Issues:
+  1. Check current usage: du -sh screenshots/
+  2. Force compression: node scripts/compress-screenshots.js
+  3. Force cleanup: node scripts/cleanup-screenshots.js
+  4. Reduce retention: Edit cleanup-config.json age_days to 14 or 7
+
+Missing Screenshots:
+  ✓ Check if in archive: ls screenshots/archive/
+  ✓ Restore from backup: unzip screenshots/archive/[filename].zip
+  ✓ Re-run failing tests to capture new screenshots
+
+STORAGE MANAGEMENT
+==================
+Typical Storage Usage:
+
+  Per test run: 50-100 MB
+  Weekly (3 runs): 150-300 MB
+  Monthly (13 runs): 650-1300 MB
+
+Without Compression:
+  Year 1: 8-15 GB
+
+With Compression:
+  After 30 days: 0.5-2 GB (compressed)
+  After 60 days: 0 GB (deleted)
+  Steady state: 150-300 MB (current month only)
+
+Recommended Strategy:
+  • Keep compression enabled
+  • Keep cleanup enabled
+  • Run cron jobs daily
+  • Review storage monthly
+
+INTEGRATION WITH TEST SUITE
+============================
+The master test runner automatically:
+  1. Captures screenshots during test execution
+  2. Organizes by module in screenshots/current/
+  3. References in HTML report generation
+  4. Stores file paths in test results
+
+To disable screenshot capture:
+  Edit test files and remove screenshot commands:
+    // await page.screenshot({ path: `screenshots/...` });
+
+To change screenshot location:
+  Edit test files and modify path:
+    path: `screenshots/current/[module]/[test-id].png`
+
+ADVANCED USAGE
+==============
+Custom Compression Script:
+  Extend scripts/compress-screenshots.js to:
+  • Upload to cloud storage (S3, Azure Blob)
+  • Generate thumbnail previews
+  • Create index of archived files
+  • Email status reports
+
+Custom Cleanup Script:
+  Extend scripts/cleanup-screenshots.js to:
+  • Archive to external hard drive
+  • Send deletion alerts
+  • Log to database
+  • Generate compliance reports
+
+Integration Examples:
+
+  AWS S3 Upload:
+    const AWS = require('aws-sdk');
+    const s3 = new AWS.S3();
+    s3.putObject({ Bucket, Key, Body });
+
+  Google Cloud Storage:
+    const {Storage} = require('@google-cloud/storage');
+    const storage = new Storage();
+    await storage.bucket(bucketName).upload(filePath);
+
+BEST PRACTICES
+==============
+1. Run compression and cleanup via cron
+2. Monitor disk space monthly
+3. Keep recent screenshots accessible
+4. Archive important test runs
+5. Document failed test screenshots
+6. Back up monthly archives
+7. Review storage trends quarterly
+
+Monitoring Script Example:
+  #!/bin/bash
+  USAGE=$(du -sh ~/Downloads/Vedak_Automation/screenshots/ | cut -f1)
+  if [ $USAGE > 5G ]; then
+    echo "Screenshots exceeding 5GB: $USAGE"
+    node ~/Downloads/Vedak_Automation/scripts/compress-screenshots.js
+  fi
+
+COMPLIANCE & AUDIT
+==================
+Screenshots may contain sensitive information:
+  • Don't store in public repositories
+  • Use .gitignore to exclude screenshots/
+  • Encrypt archived files if needed
+  • Delete after audit period
+  • Maintain deletion logs
+
+Configuration for Compliance:
+  {
+    "retention_days": 90,
+    "encryption": true,
+    "deletion_log": true,
+    "audit_trail": true
+  }
+
+SUPPORT & HELP
+==============
+Common Commands:
+  # List current screenshots by module
+  find screenshots/current -type f | sort
+  
+  # Count screenshots per module
+  find screenshots/current -type f | cut -d/ -f3 | sort | uniq -c
+  
+  # Total screenshot size
+  du -sh screenshots/current/*
+  
+  # Archive statistics
+  ls -lh screenshots/archive/
+  
+  # Recent modifications
+  ls -lht screenshots/current/*/*| head -20
+
+For issues, contact: vivek.k@vedak.com
+Repository: ~/Downloads/Vedak_Automation
+
+================================================================================

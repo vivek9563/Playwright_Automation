@@ -1,0 +1,33 @@
+================================================================================
+                 DASHBOARD MAJOR FUNCTIONALITY TEST EXECUTION
+================================================================================
+
+SCOPE: Comprehensive dashboard testing with 50+ test steps
+MODULES: Login → Dashboard
+EXPECTED EXECUTION TIME: 30-40 minutes
+OUTPUT: Excel + HTML Report + Email
+
+TEST COVERAGE:
+  1. Login verification
+  2. Dashboard redirect
+  3. Work tab access
+  4. Daily Training hover
+  5. TODOs section (Overdue + Upcoming)
+  6. Email Observations
+  7. Contribution toggle
+  8. Interested Experts Onboarded
+  9. Your Notes
+  10. Your Responsibilities
+  11. Recent Projects
+  12. Recent Targets
+  13. Recent To Dos
+  14. Profiles Added
+
+DELIVERABLES:
+  ✓ Excel sheet with categorized test cases (UI, Functionality, Major, Minor, Edge)
+  ✓ Test execution in terminal with live feedback
+  ✓ HTML report with results
+  ✓ Email notification with results
+
+STATUS: READY TO START
+================================================================================

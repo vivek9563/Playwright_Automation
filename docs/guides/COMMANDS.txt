@@ -1,0 +1,87 @@
+================================================================================
+  VEDAK CRM AUTOMATION SUITE - COMMANDS REFERENCE
+  All commands run from: ~/Downloads/Vedak_Automation
+================================================================================
+
+STEP 0 - PREREQUISITES (Run once, first time only)
+────────────────────────────────────────────────────
+cd ~/Downloads/Vedak_Automation
+npm install
+npx playwright install chromium
+
+
+================================================================================
+STEP 1 - RUN INDIVIDUAL TEST MODULES
+================================================================================
+
+1a. Dashboard Major Functionality Tests (16 tests)
+─────────────────────────────────────────────────
+node modules/dashboard/test-cases/dashboard-tests/dashboard-major-func-tests-fixed.js
+
+
+1b. Organization Tests (12 tests)
+──────────────────────────────────
+node modules/dashboard/Organization/test-cases/organization-tests.js
+
+
+1c. Projects Submenu Tests (11 tests)
+───────────────────────────────────────
+node modules/projects/test-cases/projects-submenu-tests/run-projects-submenu-tests.js
+
+
+1d. Projects Menu Tests
+───────────────────────
+node scripts/projects-menu-tests.js
+
+
+1e. Login Module Tests
+──────────────────────
+node modules/login/test-cases/functionality-tests/run-functionality-tests.js
+node modules/login/test-cases/ui-tests/run-ui-tests.js
+node modules/login/test-cases/major-tests/run-major-tests.js
+node modules/login/test-cases/minor-tests/run-minor-tests.js
+node modules/login/test-cases/edge-case-tests/run-edge-case-tests.js
+
+
+================================================================================
+STEP 2 - GENERATE MASTER REPORTS
+================================================================================
+
+node scripts/generate-master-report-comprehensive.js
+
+
+================================================================================
+STEP 3 - SEND EMAIL REPORTS
+================================================================================
+
+node scripts/send-organization-email.js
+
+
+================================================================================
+RUN ALL TESTS IN ONE GO (End-to-End)
+================================================================================
+
+cd ~/Downloads/Vedak_Automation && \
+node modules/dashboard/test-cases/dashboard-tests/dashboard-major-func-tests-fixed.js && \
+node modules/dashboard/Organization/test-cases/organization-tests.js && \
+node modules/projects/test-cases/projects-submenu-tests/run-projects-submenu-tests.js && \
+node scripts/generate-master-report-comprehensive.js && \
+node scripts/send-organization-email.js
+
+
+================================================================================
+SHELL SCRIPT SHORTCUT (Dashboard only)
+================================================================================
+
+cd ~/Downloads/Vedak_Automation && ./RUN_DASHBOARD_TESTS.sh
+
+
+================================================================================
+NOTES
+================================================================================
+- Make sure http://localhost:5173 is running before executing tests
+- Browser will open in non-headless (visible) mode automatically
+- Results are saved to: modules/test-results/
+- Excel reports: modules/dashboard/ and reports/
+- HTML report: reports/Master_Test_Report.html
+================================================================================

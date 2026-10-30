@@ -1,0 +1,53 @@
+{
+  "browsers": [
+    {
+      "name": "Chrome",
+      "version": "120+",
+      "os": "Windows",
+      "type": "chromium",
+      "status": "primary"
+    },
+    {
+      "name": "Chrome",
+      "version": "120+",
+      "os": "macOS",
+      "type": "chromium",
+      "status": "primary"
+    },
+    {
+      "name": "Chrome",
+      "version": "120+",
+      "os": "Linux",
+      "type": "chromium",
+      "status": "secondary"
+    },
+    {
+      "name": "Firefox",
+      "version": "121+",
+      "os": "Windows",
+      "type": "firefox",
+      "status": "primary"
+    },
+    {
+      "name": "Firefox",
+      "version": "121+",
+      "os": "macOS",
+      "type": "firefox",
+      "status": "primary"
+    },
+    {
+      "name": "Safari",
+      "version": "17+",
+      "os": "macOS",
+      "type": "webkit",
+      "status": "secondary"
+    },
+    {
+      "name": "Edge",
+      "version": "120+",
+      "os": "Windows",
+      "type": "chromium",
+      "status": "secondary"
+    }
+  ]
+}

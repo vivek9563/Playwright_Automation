@@ -1,0 +1,37 @@
+{
+  "name": "vedak-crm-automated-tests",
+  "version": "1.0.0",
+  "description": "Automated test suite for Vedak CRM Login Module using Playwright",
+  "main": "index.js",
+  "scripts": {
+    "init:session": "node initialize-session.js",
+    "test:ui": "node ui-tests/run-ui-tests.js",
+    "test:functionality": "node functionality-tests/run-functionality-tests.js",
+    "test:major": "node major-tests/run-major-tests.js",
+    "test:minor": "node minor-tests/run-minor-tests.js",
+    "test:edge": "node edge-case-tests/run-edge-case-tests.js",
+    "test:all": "node run-all-tests.js",
+    "test:dashboard": "node initialize-session.js && node dashboard-tests/run-dashboard-tests.js",
+    "test:optimized": "node initialize-session.js && node dashboard-tests/run-optimized-tests.js",
+    "test:debug": "PWDEBUG=1 node",
+    "test:master": "node master-test-runner.js",
+    "test:generate-report": "node generate-html-report.js",
+    "test:update-excel": "node update-excel-results.js",
+    "install-browsers": "npx playwright install",
+    "test:run-all": "node run-all-tests-and-report.js"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation",
+    "vedak-crm"
+  ],
+  "author": "Vedak QA Team",
+  "license": "MIT",
+  "dependencies": {
+    "@playwright/test": "^1.40.0",
+    "dotenv": "^16.3.1",
+    "exceljs": "^4.4.0",
+    "nodemailer": "^10.2.1"
+  }
+}
