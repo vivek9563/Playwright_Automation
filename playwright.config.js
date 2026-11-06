@@ -1,6 +1,11 @@
 // @ts-check
 const { defineConfig } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
+
+const sessionFilePath = path.join(__dirname, 'sessions/session-data.json');
+const hasSession = fs.existsSync(sessionFilePath);
 
 /**
  * VEDAK CRM — Playwright Test Configuration
@@ -25,7 +30,7 @@ module.exports = defineConfig({
   // Allow 1 retry on flaky failures
   retries: 1,
 
-  // Run tests serially (existing scripts launch their own browsers)
+  // Run tests serially
   workers: 1,
   fullyParallel: false,
 
@@ -54,14 +59,22 @@ module.exports = defineConfig({
     {
       name: 'dashboard',
       testMatch: '**/specs/dashboard.spec.js',
+      use: hasSession ? { storageState: sessionFilePath } : {},
     },
     {
       name: 'organization',
       testMatch: '**/specs/organization.spec.js',
+      use: hasSession ? { storageState: sessionFilePath } : {},
     },
     {
       name: 'projects',
       testMatch: '**/specs/projects.spec.js',
+      use: hasSession ? { storageState: sessionFilePath } : {},
+    },
+    {
+      name: 'recent-projects',
+      testMatch: '**/specs/recent-projects.spec.js',
+      use: hasSession ? { storageState: sessionFilePath } : {},
     },
   ],
 });
