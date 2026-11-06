@@ -1,0 +1,72 @@
+{
+  "validCredentials": [
+    {
+      "email": "vivek.k@vedak.com",
+      "password": "your_gmail_app_password",
+      "expectedDashboardTitle": "Dashboard"
+    }
+  ],
+  "testNotes": [
+    "Test note 1 - Created by automation",
+    "Test note 2 - Checking persistence",
+    "Test note 3 - Verification test",
+    "Important task - Follow up needed",
+    "Remember to review analytics"
+  ],
+  "scrollTestData": {
+    "startPosition": 0,
+    "targetScrollDistance": 500,
+    "maxScrollDistance": 3000
+  },
+  "hoverTestElements": [
+    "Daily Training widget",
+    "Last 30 days section",
+    "Todos widget",
+    "Email Observations",
+    "Interested Experts",
+    "Your Notes",
+    "Your Responsibilities",
+    "Recent Projects",
+    "Recent Target",
+    "Recent To Dos",
+    "Profiles Added"
+  ],
+  "viewAllButtons": [
+    {
+      "section": "Daily Training",
+      "buttonText": "View All",
+      "expectedUrl": "/daily-training"
+    },
+    {
+      "section": "Todos",
+      "buttonText": "View All",
+      "expectedUrl": "/todos"
+    },
+    {
+      "section": "Observations",
+      "buttonText": "View All",
+      "expectedUrl": "/observations"
+    },
+    {
+      "section": "Recent Projects",
+      "buttonText": "View All",
+      "expectedUrl": "/projects"
+    },
+    {
+      "section": "Recent Target",
+      "buttonText": "View All",
+      "expectedUrl": "/targets"
+    },
+    {
+      "section": "Recent To Dos",
+      "buttonText": "View All",
+      "expectedUrl": "/todos"
+    }
+  ],
+  "toggleSections": [
+    {
+      "section": "Contribution",
+      "toggleOptions": ["Last 30d", "Monthly"]
+    }
+  ]
+}
