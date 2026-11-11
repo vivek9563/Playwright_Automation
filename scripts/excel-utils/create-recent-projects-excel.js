@@ -14,42 +14,17 @@
 
 'use strict';
 
-const ExcelJS = require('exceljs');
-const path = require('path');
-const fs = require('fs');
+const {
+  EXCEL_THEME,
+  DEFAULT_TEST_CASE_COLUMNS,
+  DEFAULT_RECENT_PROJECTS_EXCEL_PATHS,
+  createCategorizedExcel,
+  appendTestCasesToExcel,
+} = require('./common-excel-utils');
 
-const OUTPUT_PATHS = [
-  path.join(__dirname, '../../Vedak_CRM_Recent_Projects_TestCases.xlsx'),
-  path.join(__dirname, '../../modules/04_projects/Vedak_CRM_Recent_Projects_TestCases.xlsx'),
-];
-
-// Color palette
-const THEME = {
-  HEADER_BG: 'FF1F4E79',     // Corporate deep navy
-  HEADER_FONT: 'FFFFFFFF',   // White
-  SUMMARY_BG: 'FF2E75B6',    // Blue accent
-  ZEBRA_BG: 'FFF9FAFB',      // Subtle row striping
-  BORDER_COLOR: 'FFD9D9D9',  // Light grey
-  PASS_BG: 'FFD9EAD3',       // Soft green
-  PASS_FONT: 'FF274E13',
-  FAIL_BG: 'FFF4CCCC',       // Soft red
-  FAIL_FONT: 'FF990000',
-  PENDING_BG: 'FFFFF2CC',    // Soft yellow
-  PENDING_FONT: 'FF7F6000',
-};
-
-const COLUMNS = [
-  { header: 'Test Case ID', key: 'id', width: 16 },
-  { header: 'Test Scenario / Description', key: 'description', width: 34 },
-  { header: 'Pre-conditions', key: 'preconditions', width: 32 },
-  { header: 'Test Steps', key: 'steps', width: 44 },
-  { header: 'Expected Result', key: 'expected', width: 40 },
-  { header: 'Actual Result', key: 'actual', width: 36 },
-  { header: 'Priority', key: 'priority', width: 12 },
-  { header: 'Status', key: 'status', width: 14 },
-  { header: 'Execution Date', key: 'date', width: 22 },
-  { header: 'Remarks', key: 'remarks', width: 36 },
-];
+const OUTPUT_PATHS = DEFAULT_RECENT_PROJECTS_EXCEL_PATHS;
+const THEME = EXCEL_THEME;
+const COLUMNS = DEFAULT_TEST_CASE_COLUMNS;
 
 const TEST_DATA = {
   'UI Tests': [
@@ -244,236 +219,34 @@ const TEST_DATA = {
   ],
 };
 
-async function buildWorkbook() {
-  const wb = new ExcelJS.Workbook();
-  wb.creator = 'Vedak QA Automation Engineer';
-  wb.lastModifiedBy = 'Vedak QA Automation Engineer';
-  wb.created = new Date();
-  wb.modified = new Date();
-
-  const executionDate = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-
-  // 1. SUMMARY SHEET
-  const summarySheet = wb.addWorksheet('Summary', {
-    views: [{ showGridLines: true }],
-  });
-
-  summarySheet.columns = [
-    { header: '', key: 'col1', width: 6 },
-    { header: '', key: 'col2', width: 32 },
-    { header: '', key: 'col3', width: 22 },
-    { header: '', key: 'col4', width: 18 },
-    { header: '', key: 'col5', width: 20 },
-  ];
-
-  // Title Block
-  summarySheet.mergeCells('B2:E2');
-  const titleCell = summarySheet.getCell('B2');
-  titleCell.value = 'VEDAK CRM — RECENT PROJECTS TEST AUTOMATION EXECUTION REPORT';
-  titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: THEME.HEADER_BG } };
-  titleCell.font = { name: 'Calibri', size: 14, bold: true, color: { argb: THEME.HEADER_FONT } };
-  titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
-  summarySheet.getRow(2).height = 36;
-
-  // Metadata block
-  const metaRows = [
-    ['Test Suite', 'Recent Projects Sub-menu & Scroll Validation'],
-    ['Module', 'Projects (Recent Projects Sub-menu)'],
-    ['Automation Framework', 'Playwright (@playwright/test)'],
-    ['QA Engineer', 'Senior QA Automation Engineer'],
-    ['Execution Date & Time', executionDate],
-    ['Environment', 'Localhost (http://localhost:5173) / CRM Staging'],
-  ];
-
-  metaRows.forEach((r, idx) => {
-    const rowNum = 4 + idx;
-    summarySheet.getCell(`B${rowNum}`).value = r[0];
-    summarySheet.getCell(`B${rowNum}`).font = { bold: true };
-    summarySheet.getCell(`B${rowNum}`).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF2F2F2' } };
-    summarySheet.mergeCells(`C${rowNum}:E${rowNum}`);
-    const valCell = summarySheet.getCell(`C${rowNum}`);
-    valCell.value = r[1];
-  });
-
-  // Table summary by Category
-  const startCatRow = 12;
-  summarySheet.mergeCells(`B${startCatRow}:E${startCatRow}`);
-  const catHeader = summarySheet.getCell(`B${startCatRow}`);
-  catHeader.value = 'TEST EXECUTION SUMMARY BY CATEGORY';
-  catHeader.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: THEME.SUMMARY_BG } };
-  catHeader.font = { bold: true, color: { argb: 'FFFFFFFF' } };
-  catHeader.alignment = { horizontal: 'center', vertical: 'middle' };
-  summarySheet.getRow(startCatRow).height = 24;
-
-  const tableHeaderRow = startCatRow + 1;
-  summarySheet.getCell(`B${tableHeaderRow}`).value = 'Test Category / Tab';
-  summarySheet.getCell(`C${tableHeaderRow}`).value = 'Total Tests';
-  summarySheet.getCell(`D${tableHeaderRow}`).value = 'Passed';
-  summarySheet.getCell(`E${tableHeaderRow}`).value = 'Pass Rate (%)';
-
-  ['B', 'C', 'D', 'E'].forEach((col) => {
-    const cell = summarySheet.getCell(`${col}${tableHeaderRow}`);
-    cell.font = { bold: true };
-    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFEAECEE' } };
-    cell.alignment = { horizontal: 'center', vertical: 'middle' };
-  });
-
-  let currentCatRow = tableHeaderRow + 1;
-  let totalAll = 0;
-  let passedAll = 0;
-
-  for (const [catName, tests] of Object.entries(TEST_DATA)) {
-    const total = tests.length;
-    const passed = tests.filter((t) => (t.status || '').toUpperCase() === 'PASS').length;
-    totalAll += total;
-    passedAll += passed;
-    const passRate = total > 0 ? `${Math.round((passed / total) * 100)}%` : '0%';
-
-    summarySheet.getCell(`B${currentCatRow}`).value = catName;
-    summarySheet.getCell(`C${currentCatRow}`).value = total;
-    summarySheet.getCell(`D${currentCatRow}`).value = passed;
-    summarySheet.getCell(`E${currentCatRow}`).value = passRate;
-
-    summarySheet.getCell(`C${currentCatRow}`).alignment = { horizontal: 'center' };
-    summarySheet.getCell(`D${currentCatRow}`).alignment = { horizontal: 'center' };
-    summarySheet.getCell(`E${currentCatRow}`).alignment = { horizontal: 'center' };
-
-    currentCatRow++;
-  }
-
-  // Grand Total Row
-  summarySheet.getCell(`B${currentCatRow}`).value = 'GRAND TOTAL';
-  summarySheet.getCell(`B${currentCatRow}`).font = { bold: true };
-  summarySheet.getCell(`C${currentCatRow}`).value = totalAll;
-  summarySheet.getCell(`C${currentCatRow}`).font = { bold: true };
-  summarySheet.getCell(`C${currentCatRow}`).alignment = { horizontal: 'center' };
-  summarySheet.getCell(`D${currentCatRow}`).value = passedAll;
-  summarySheet.getCell(`D${currentCatRow}`).font = { bold: true };
-  summarySheet.getCell(`D${currentCatRow}`).alignment = { horizontal: 'center' };
-  summarySheet.getCell(`E${currentCatRow}`).value = `${Math.round((passedAll / totalAll) * 100)}%`;
-  summarySheet.getCell(`E${currentCatRow}`).font = { bold: true };
-  summarySheet.getCell(`E${currentCatRow}`).alignment = { horizontal: 'center' };
-  ['B', 'C', 'D', 'E'].forEach((col) => {
-    summarySheet.getCell(`${col}${currentCatRow}`).fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FFD9E1F2' },
-    };
-  });
-
-  // 2. CATEGORIZED TABS
-  for (const [tabName, tests] of Object.entries(TEST_DATA)) {
-    const ws = wb.addWorksheet(tabName, {
-      views: [{ showGridLines: true }],
-    });
-
-    ws.columns = COLUMNS;
-
-    // Header styling
-    const headerRow = ws.getRow(1);
-    headerRow.height = 30;
-    headerRow.eachCell((cell) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: THEME.HEADER_BG },
-      };
-      cell.font = {
-        name: 'Calibri',
-        size: 11,
-        bold: true,
-        color: { argb: THEME.HEADER_FONT },
-      };
-      cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
-      cell.border = {
-        top: { style: 'thin', color: { argb: THEME.BORDER_COLOR } },
-        bottom: { style: 'medium', color: { argb: 'FF000000' } },
-        left: { style: 'thin', color: { argb: THEME.BORDER_COLOR } },
-        right: { style: 'thin', color: { argb: THEME.BORDER_COLOR } },
-      };
-    });
-
-    // Add rows
-    tests.forEach((tc, idx) => {
-      const row = ws.addRow({
-        id: tc.id,
-        description: tc.description,
-        preconditions: tc.preconditions,
-        steps: tc.steps,
-        expected: tc.expected,
-        actual: tc.actual,
-        priority: tc.priority,
-        status: tc.status,
-        date: executionDate,
-        remarks: tc.remarks,
-      });
-
-      row.height = 54;
-      const isEven = idx % 2 === 0;
-
-      row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
-        // Default font & borders
-        cell.font = { name: 'Calibri', size: 10 };
-        cell.border = {
-          top: { style: 'thin', color: { argb: THEME.BORDER_COLOR } },
-          bottom: { style: 'thin', color: { argb: THEME.BORDER_COLOR } },
-          left: { style: 'thin', color: { argb: THEME.BORDER_COLOR } },
-          right: { style: 'thin', color: { argb: THEME.BORDER_COLOR } },
-        };
-
-        // Zebra striping
-        if (isEven) {
-          cell.fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: THEME.ZEBRA_BG },
-          };
-        }
-
-        // Alignments
-        // col 1: ID, col 7: Priority, col 8: Status, col 9: Date -> Center
-        if ([1, 7, 8, 9].includes(colNumber)) {
-          cell.alignment = { horizontal: 'center', vertical: 'middle' };
-        } else {
-          cell.alignment = { horizontal: 'left', vertical: 'middle', wrapText: true };
-        }
-
-        // Status styling
-        if (colNumber === 8) {
-          const st = (cell.value || '').toString().toUpperCase();
-          cell.font = { bold: true };
-          if (st.includes('PASS')) {
-            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: THEME.PASS_BG } };
-            cell.font = { bold: true, color: { argb: THEME.PASS_FONT } };
-          } else if (st.includes('FAIL')) {
-            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: THEME.FAIL_BG } };
-            cell.font = { bold: true, color: { argb: THEME.FAIL_FONT } };
-          } else {
-            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: THEME.PENDING_BG } };
-            cell.font = { bold: true, color: { argb: THEME.PENDING_FONT } };
-          }
-        }
-      });
-    });
-  }
-
-  // Write to all output locations if they don't exist yet, then append Filter Columns tests
-  const { appendTestCasesToExcel } = require('./update-recent-projects-excel');
+async function buildWorkbook(options = {}) {
   const { FILTER_COLUMNS_TEST_CASES } = require('./append-recent-projects-filter-columns');
+  const { PROJECT_DETAIL_TEST_CASES } = require('./append-recent-projects-detail-cases');
+  const filePaths = options.filePaths || OUTPUT_PATHS;
 
-  for (const outPath of OUTPUT_PATHS) {
-    if (!fs.existsSync(outPath)) {
-      fs.mkdirSync(path.dirname(outPath), { recursive: true });
-      await wb.xlsx.writeFile(outPath);
-      console.log(`✅ Generated base Excel file: ${outPath}`);
-    } else {
-      console.log(`ℹ️ Preserving existing Excel file (non-destructive): ${outPath}`);
-    }
-  }
+  await createCategorizedExcel({
+    filePaths,
+    columns: COLUMNS,
+    testCasesByTab: TEST_DATA,
+    overwriteExisting: Boolean(options.overwriteExisting),
+    summaryMeta: {
+      title: 'VEDAK CRM — RECENT PROJECTS TEST AUTOMATION EXECUTION REPORT',
+      testSuite: 'Recent Projects Sub-menu, Scroll, Filter Columns & Project Detail Validation',
+      module: 'Projects (Recent Projects Sub-menu)',
+      framework: 'Playwright (@playwright/test)',
+      qaEngineer: 'Senior QA Automation Engineer',
+      environment: 'Localhost (http://localhost:5173) / CRM Staging',
+    },
+  });
 
-  // Non-destructively append/update base + Filter Columns test cases without deleting existing rows
-  await appendTestCasesToExcel(TEST_DATA);
-  await appendTestCasesToExcel(FILTER_COLUMNS_TEST_CASES);
+  // Non-destructively sync base, Filter Columns, and Project Detail test cases without overwriting live results
+  const syncOptions = {
+    filePaths,
+    preserveExistingStatus: options.preserveExistingStatus !== false,
+  };
+  await appendTestCasesToExcel(TEST_DATA, syncOptions);
+  await appendTestCasesToExcel(FILTER_COLUMNS_TEST_CASES, syncOptions);
+  await appendTestCasesToExcel(PROJECT_DETAIL_TEST_CASES, syncOptions);
 }
 
 if (require.main === module) {
@@ -483,5 +256,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = { buildWorkbook, TEST_DATA, COLUMNS };
+module.exports = { buildWorkbook, TEST_DATA, COLUMNS, THEME, OUTPUT_PATHS };
 

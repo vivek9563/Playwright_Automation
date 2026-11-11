@@ -215,8 +215,11 @@ const PROJECT_DETAIL_TEST_CASES = {
   ],
 };
 
-async function run() {
-  await appendTestCasesToExcel(PROJECT_DETAIL_TEST_CASES);
+async function run(options = {}) {
+  await appendTestCasesToExcel(PROJECT_DETAIL_TEST_CASES, {
+    preserveExistingStatus: true,
+    ...options,
+  });
 }
 
 if (require.main === module) {

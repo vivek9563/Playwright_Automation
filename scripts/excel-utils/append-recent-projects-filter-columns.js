@@ -147,8 +147,11 @@ const FILTER_COLUMNS_TEST_CASES = {
   ],
 };
 
-async function run() {
-  await appendTestCasesToExcel(FILTER_COLUMNS_TEST_CASES);
+async function run(options = {}) {
+  await appendTestCasesToExcel(FILTER_COLUMNS_TEST_CASES, {
+    preserveExistingStatus: true,
+    ...options,
+  });
 }
 
 if (require.main === module) {
