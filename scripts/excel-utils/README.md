@@ -4,21 +4,29 @@ Scripts that create, append, and update Excel test case files.
 
 | File | Purpose |
 |------|---------|
-| `common-excel-utils.js` | Shared Projects module Excel utility (theme, styling, categorized workbook creation, non-destructive row appending, categorized & flat-sheet result updates, and `createProjectsExcelReporter`) |
-| `update-recent-projects-excel.js` | Backward-compatible wrapper around `common-excel-utils.js` for `Vedak_CRM_Recent_Projects_TestCases.xlsx` |
-| `create-recent-projects-excel.js` | Non-destructively creates/syncs `Vedak_CRM_Recent_Projects_TestCases.xlsx` with all categorized tabs |
-| `append-recent-projects-filter-columns.js` | Appends Filter Columns test cases non-destructively into `Vedak_CRM_Recent_Projects_TestCases.xlsx` |
-| `append-recent-projects-detail-cases.js` | Appends Project Detail window test cases non-destructively into `Vedak_CRM_Recent_Projects_TestCases.xlsx` |
+| `projects-excel-utils.js` | Unified Projects module Excel utility & test case registry (theme, styling, workbook creation, non-destructive appending, result updates, flat-sheet updates, `createProjectsExcelReporter`, and all Recent Projects Scroll, Filter Columns & Project Detail test cases) |
 | `create-organization-excel.js` | Creates `Organization_TestCases.xlsx` with all 12 test cases |
 | `create-projects-excel.js` | Creates Projects menu test cases Excel file |
 | `update-excel-results.js` | Updates Login/Dashboard/Master Excel files with latest test results |
 | `update-main-dashboard-excel.js` | Updates Dashboard Master Excel with Organization results |
 
-## Using `common-excel-utils.js` in New Projects Suites
+## Target Workbook (Recent Projects)
+- [modules/04_projects/Vedak_CRM_Recent_Projects_TestCases.xlsx](../../modules/04_projects/Vedak_CRM_Recent_Projects_TestCases.xlsx)
+
+## CLI Usage (`projects-excel-utils.js`)
+
+```bash
+npm run generate:recent-projects-excel       # Initialize workbook if missing & sync all 44 cases
+npm run append:recent-projects-excel         # Sync Filter Columns cases non-destructively
+npm run append:recent-project-details-excel  # Sync Project Detail cases non-destructively
+npm run stats:recent-projects-excel          # Print PASS/FAIL/PENDING counts
+```
+
+## Using `projects-excel-utils.js` in New Projects Suites
 
 ```js
 const path = require('path');
-const { createProjectsExcelReporter } = require('../scripts/excel-utils/common-excel-utils');
+const { createProjectsExcelReporter } = require('../scripts/excel-utils/projects-excel-utils');
 
 const reporter = createProjectsExcelReporter({
   filePaths: [
@@ -37,11 +45,4 @@ await reporter.appendTestCases(NEW_CASES_BY_TAB, { preserveExistingStatus: true 
 
 // 2. Update execution results from Playwright afterAll():
 await reporter.updateResults(testResults);
-```
-
-> Run manually only if you need to initialize or append to a workbook:
-```bash
-npm run generate:recent-projects-excel
-npm run append:recent-projects-excel
-npm run append:recent-project-details-excel
 ```

@@ -1,6 +1,6 @@
 /**
  * update-excel.js — Shared Excel result updater
- * Delegates to scripts/excel-utils/common-excel-utils.js (`updateFlatSheetResults`)
+ * Delegates to scripts/excel-utils/projects-excel-utils.js (`updateFlatSheetResults`)
  * while preserving the existing `updateExcel(filePath, sheetName, results, cols)` API.
  *
  * Usage:
@@ -16,7 +16,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-const { updateFlatSheetResults } = require('./excel-utils/common-excel-utils');
+const { updateFlatSheetResults } = require('./excel-utils/projects-excel-utils');
 
 /**
  * @param {string|string[]} filePath - absolute path(s) to .xlsx

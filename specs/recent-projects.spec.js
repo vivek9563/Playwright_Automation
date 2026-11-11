@@ -34,7 +34,7 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 
-const { updateRecentProjectsExcel } = require('../scripts/excel-utils/update-recent-projects-excel');
+const { updateRecentProjectsExcel } = require('../scripts/excel-utils/projects-excel-utils');
 
 const BASE_URL = (process.env.APP_URL || 'http://localhost:5173').replace(/\/$/, '');
 const SESSION_FILE = path.join(__dirname, '../sessions/session-data.json');
