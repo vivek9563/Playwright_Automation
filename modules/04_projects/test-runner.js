@@ -13,6 +13,10 @@ async function runProjectsTests() {
         name: 'Sidebar Tests',
         script: 'modules/04_projects/test-cases/sidebar-tests/run-sidebar-tests.js',
       },
+      {
+        name: 'Recent Projects Tests',
+        script: 'modules/04_projects/test-cases/recent-projects-tests/run-recent-projects-tests.js',
+      },
     ],
   });
 }

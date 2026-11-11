@@ -20,7 +20,8 @@
     "install-browsers": "npx playwright install",
     "test:run-all": "node run-all-tests-and-report.js",
     "test:recent-projects": "npx playwright test --project=recent-projects",
-    "generate:recent-projects-excel": "node scripts/excel-utils/create-recent-projects-excel.js"
+    "generate:recent-projects-excel": "node scripts/excel-utils/create-recent-projects-excel.js",
+    "append:recent-projects-excel": "node scripts/excel-utils/append-recent-projects-filter-columns.js"
   },
   "keywords": [
     "playwright",

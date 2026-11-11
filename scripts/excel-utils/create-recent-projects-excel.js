@@ -457,12 +457,23 @@ async function buildWorkbook() {
     });
   }
 
-  // Write to all output locations
+  // Write to all output locations if they don't exist yet, then append Filter Columns tests
+  const { appendTestCasesToExcel } = require('./update-recent-projects-excel');
+  const { FILTER_COLUMNS_TEST_CASES } = require('./append-recent-projects-filter-columns');
+
   for (const outPath of OUTPUT_PATHS) {
-    fs.mkdirSync(path.dirname(outPath), { recursive: true });
-    await wb.xlsx.writeFile(outPath);
-    console.log(`✅ Generated Excel file: ${outPath}`);
+    if (!fs.existsSync(outPath)) {
+      fs.mkdirSync(path.dirname(outPath), { recursive: true });
+      await wb.xlsx.writeFile(outPath);
+      console.log(`✅ Generated base Excel file: ${outPath}`);
+    } else {
+      console.log(`ℹ️ Preserving existing Excel file (non-destructive): ${outPath}`);
+    }
   }
+
+  // Non-destructively append/update base + Filter Columns test cases without deleting existing rows
+  await appendTestCasesToExcel(TEST_DATA);
+  await appendTestCasesToExcel(FILTER_COLUMNS_TEST_CASES);
 }
 
 if (require.main === module) {

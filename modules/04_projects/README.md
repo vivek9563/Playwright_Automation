@@ -8,8 +8,10 @@ This module contains automated tests for the Vedak CRM projects and sidebar navi
 projects/
 ├── test-cases/
 │   ├── projects-submenu-tests/      # Projects submenu navigation
+│   ├── recent-projects-tests/       # Recent Projects scroll & Filter Columns tests
 │   └── sidebar-tests/               # Sidebar menu tests
 ├── Vedak_CRM_Projects_Submenu_TestCases.xlsx
+├── Vedak_CRM_Recent_Projects_TestCases.xlsx
 ├── Vedak_CRM_Sidebar_TestCases.xlsx
 ├── Vedak_CRM_Projects_Menu_TestCases.xlsx
 ├── test-runner.js                   # Main test orchestrator
@@ -20,7 +22,14 @@ projects/
 
 ### Run All Projects Tests
 ```bash
-node modules/projects/test-runner.js
+node modules/04_projects/test-runner.js
+```
+
+### Run Recent Projects Tests (Scroll & Filter Columns)
+```bash
+npx playwright test --project=recent-projects --headed
+# or via module script:
+node modules/04_projects/test-cases/recent-projects-tests/run-recent-projects-tests.js --headed
 ```
 
 ### Run Projects Submenu Tests
